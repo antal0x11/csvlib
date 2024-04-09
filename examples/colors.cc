@@ -45,5 +45,9 @@ int main()
     }
     std::cout << std::endl;
     std::cout << rs[0].code << " " << rs[0].id << std::endl;
+
+    std::pair<int, int> _info(csvlib::CSV<Colors>::info("../tests/example.csv", ","));
+    std::cout << "csv info -> "
+              << "rows: " << _info.first << " cols: " << _info.second << std::endl;
     return 0;
 }

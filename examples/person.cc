@@ -48,5 +48,9 @@ int main()
     std::cout << std::endl;
     std::cout << rs_p[0].name << " " << rs_p[0].age << " " << rs_p[0].id << std::endl;
 
+    std::pair<int, int> _info(csvlib::CSV<Person>::info("../tests/example1.csv", ","));
+    std::cout << "csv info -> "
+              << "rows: " << _info.first << " cols: " << _info.second << std::endl;
+
     return 0;
 }

@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <utility>
 #include <sstream>
 
 namespace csvlib
@@ -146,6 +147,46 @@ namespace csvlib
             }
 
             return T::init(tokens);
+        }
+
+        /**
+         * @brief                      Information about the number of rows and columns.
+         *
+         * @param file_name            The name of the file or the path to read from.
+         * @param delimeter            The delimeter of the string represantation in the csv file.
+         * @return std::pair<int, int> Returns a pair with the number of rows and columns.
+         *                             The pair is in the format (rows,cols)
+         */
+        static std::pair<int, int> info(const std::string &file_name, const std::string &delimeter)
+        {
+
+            std::ifstream file;
+            std::string line, _l;
+            int rows = 0, cols = 0;
+            std::string sample;
+            char _d = delimeter[0];
+
+            file.open(file_name);
+            if (!file.is_open())
+            {
+                throw("Error opening file.");
+            }
+
+            while (std::getline(file, line))
+            {
+                if (cols == 0)
+                {
+                    std::stringstream _s(line);
+                    while (std::getline(_s, _l, _d))
+                    {
+                        cols++;
+                    }
+                }
+                rows++;
+            }
+
+            file.close();
+            return std::make_pair(rows, cols);
         }
     };
 }
