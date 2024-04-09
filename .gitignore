@@ -31,3 +31,6 @@
 /tests
 
 .vscode
+
+./main.cc
+./Makefile
